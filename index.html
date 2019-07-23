@@ -62,6 +62,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-踩坑：string-size-type引起的死循环" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/23/踩坑：string-size-type引起的死循环/" class="article-date">
+  <time datetime="2019-07-23T02:51:19.000Z" itemprop="datePublished">2019-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        在C++的string类的应用中，常常会需要用到下标索引进行遍历，对字符串中的字符进行操作。在《C++ Primer》第五版中，介绍了string类的迭代器，它的类型是string::size_type，是个无符号的类型，可以用来遍历大型的字符串，这是int型的范围所达不到的。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>​        然而，在某些情况中，定义一个string::size_type类型的下标，会导致意想不到的死循环。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string str=&quot;test string&quot;;</span><br><span class="line">string::size_type index=str.size()-1;//下标从最后一个字符开始</span><br><span class="line">for(;index&gt;=0;index--)//从后往前遍历，逆序输出每个字符</span><br><span class="line">	cout&lt;&lt;str[index];</span><br></pre></td></tr></table></figure>
+
+<p><strong>这里程序会报错！！进入无限循环</strong></p>
+<p>​        原因在于string::size_type类型变量index是一个无符号的数，不能用index–的语句变为负数。因此循环会无限执行下去。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>​        将下标index的类型定义成常规的类型，可以在逆序遍历时，避免这样的问题。如果字符串较大，可以用long long类型，它是C++ 11的64位整型的基本类型，占8个字节（而int型和long型占4个字节），long long 可以表示的范围是[−2^63,2^63−1]。</p>
+<p>​        把上面代码的第二行改为如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long long index=str.size()-1;//将str.size()-1 转换为long long型赋值给index</span><br></pre></td></tr></table></figure>
+
+<p>​        输出结果为：<code>gnirts tset</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/23/踩坑：string-size-type引起的死循环/" data-id="cjyf93msj000238tmwkameqr7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-C-各种进制的输入输出" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/22/C-各种进制的输入输出/" class="article-date">
@@ -95,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjye6eobd0000totmfgo8acrr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjyf93mra000038tm7x7kiv5e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/选择排序/" data-id="cjye6eofu0003totmlb1yqtmp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/选择排序/" data-id="cjyf93mso000538tm98nafu1m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -177,7 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/19/冒泡排序/" data-id="cjye6eofx0004totmwjjldw0a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/19/冒泡排序/" data-id="cjyf93msi000138tmvmm09bf0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/18/My-First-Hexo-File/" data-id="cjye6eofo0001totm1rxf1ljf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/18/My-First-Hexo-File/" data-id="cjyf93msn000438tmw9fbakt6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/18/hello-world/" data-id="cjye6eofs0002totms34myj8a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/18/hello-world/" data-id="cjyf93msl000338tmog9sp4rs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,6 +352,10 @@
       <ul>
         
           <li>
+            <a href="/2019/07/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/22/C-各种进制的输入输出/">C++各种进制的输入输出</a>
           </li>
         
@@ -317,10 +369,6 @@
         
           <li>
             <a href="/2019/07/18/My-First-Hexo-File/">My First Hexo File</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/18/hello-world/">Hello World</a>
           </li>
         
       </ul>
