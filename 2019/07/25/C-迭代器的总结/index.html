@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>C++迭代器的总结 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下： vector获取迭代器对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器： 1vector&amp;lt;int&amp;gt;:: iterator iter = vt.begin();  其中： iterator```是迭代器的类型；12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++迭代器的总结">
+<meta property="og:url" content="http://yoursite.com/2019/07/25/C-迭代器的总结/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下： vector获取迭代器对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器： 1vector&amp;lt;int&amp;gt;:: iterator iter = vt.begin();  其中： iterator```是迭代器的类型；12">
+<meta property="og:locale" content="Chinese">
+<meta property="og:updated_time" content="2019-07-25T03:02:29.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++迭代器的总结">
+<meta name="twitter:description" content="C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下： vector获取迭代器对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器： 1vector&amp;lt;int&amp;gt;:: iterator iter = vt.begin();  其中： iterator```是迭代器的类型；12">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C-迭代器的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/25/C-迭代器的总结/" class="article-date">
+  <time datetime="2019-07-25T02:24:49.000Z" itemprop="datePublished">2019-07-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++迭代器的总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下：</p>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h3 id="获取迭代器"><a href="#获取迭代器" class="headerlink" title="获取迭代器"></a>获取迭代器</h3><p>对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt;:: iterator iter = vt.begin();</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<figure class="highlight plain"><figcaption><span>iterator```是迭代器的类型；</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```vt```是容器的对象名称；</span><br><span class="line"></span><br><span class="line">```iter```是迭代器的名称，初始指向容器的第一个元素。</span><br><span class="line"></span><br><span class="line">### 通过迭代器进行操作</span><br><span class="line"></span><br><span class="line">顺序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+
+<p>for (auto iter = vt.begin(); iter!=vt.end(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中：</span><br><span class="line"></span><br><span class="line">```*iter```是```vt```中遍历到的当前元素，在整个for循环中，从第一个元素开始，到最后一个元素结束；</span><br><span class="line"></span><br><span class="line">```vt.end()```是最后一个元素的下一个位置，因此不包括它；</span><br><span class="line"></span><br><span class="line">逆序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+
+<p>for ( vector<int>:: reverse_iterator iter = vt.rbegin();<br>        iter!=vt.rend(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</int></p>
+<pre><code>
+其中：
+
+```vector&lt;int&gt;:: reverse_iterator```为逆向遍历的迭代器的类型；
+
+```vt.rbegin()```为最后一个元素；
+
+```vt.rend()```为第一个元素的下一个位置（可以理解为前一个位置）
+
+**注意！！**
+
+```iter```仍然每次增加一，不要认为是逆序遍历就每次减一
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/25/C-迭代器的总结/" data-id="cjyu4uxlo0000dctmw2wumxmx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/08/02/快速排序/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          快速排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/23/踩坑：string-size-type引起的死循环/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">踩坑：string::size_type引起的死循环</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/02/快速排序/">快速排序</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/C-迭代器的总结/">C++迭代器的总结</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/C-各种进制的输入输出/">C++各种进制的输入输出</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/21/选择排序/">选择排序</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Huo Zhuo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

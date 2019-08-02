@@ -62,6 +62,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-快速排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/02/快速排序/" class="article-date">
+  <time datetime="2019-08-02T13:05:04.000Z" itemprop="datePublished">2019-08-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/02/快速排序/">快速排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>选取最左边数为枢轴，定义两个游标i和j分别指向两端，定义一个变量临时存放枢轴；<br>j向左移找出小于枢轴的放在i的位置，i向右移找出大于等于枢轴的放右边的位置，依次交替；<br>直到i与j重合，把枢轴赋值给中间的位置(即i)，再递归枢轴的前半和后半部分。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>时间复杂度：平均O(nlogn)，最慢O(n^2)</p>
+<p>稳定性：不稳定</p>
+<p>优点：平均速度快</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;//用函数模板定义</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">quick_sort</span>(<span class="title">T</span>* <span class="title">a</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">left</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">right</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">if</span> (left &lt; right)<span class="comment">//递归出口为left&gt;=right</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//定义指针i和j，这两个指针从两端向中间移动</span></span><br><span class="line">		<span class="keyword">int</span> i = left;  </span><br><span class="line">		<span class="keyword">int</span> j = right;</span><br><span class="line">		T pivot = a[left];<span class="comment">//选取最左边的元素为基准，同时也能给a[i]腾出位置</span></span><br><span class="line">		<span class="keyword">while</span> (i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] &gt;= pivot)j--;<span class="comment">//大的放右边，所以从右向左找出比pivot小的元素</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			&#123;</span><br><span class="line">				a[i] = a[j];<span class="comment">//前面已经给a[i]腾出位置了，现在可以把小元素a[j]放在a[i]的位置</span></span><br><span class="line">				i++;<span class="comment">//i的指针向右移，准备后续判断</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; pivot)i++;<span class="comment">//小的放左边，i向右移直到发现a[i]不比pivot小</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			&#123;</span><br><span class="line">				a[j] = a[i];<span class="comment">//由于前面a[j]的值赋值给了前面的位置，所以a[j]的位置空出来了</span></span><br><span class="line">				j--;<span class="comment">//j的指针向左移，准备下一轮的循环</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		a[i] = pivot;<span class="comment">//当i=j的时候退出循环，此时的a[i]是空出的位置</span></span><br><span class="line">		quick_sort(a, left, i - <span class="number">1</span>);</span><br><span class="line">		quick_sort(a, i + <span class="number">1</span>, right);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k[] = &#123; <span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">1</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出为64285723901</span></span><br><span class="line">	quick_sort(k, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出为01223456789</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/02/快速排序/" data-id="cjyu4uxny0001dctm5hbnasu5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-C-迭代器的总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/25/C-迭代器的总结/" class="article-date">
+  <time datetime="2019-07-25T02:24:49.000Z" itemprop="datePublished">2019-07-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/25/C-迭代器的总结/">C++迭代器的总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下：</p>
+<h2 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h2><h3 id="获取迭代器"><a href="#获取迭代器" class="headerlink" title="获取迭代器"></a>获取迭代器</h3><p>对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt;:: iterator iter = vt.begin();</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<figure class="highlight plain"><figcaption><span>iterator```是迭代器的类型；</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```vt```是容器的对象名称；</span><br><span class="line"></span><br><span class="line">```iter```是迭代器的名称，初始指向容器的第一个元素。</span><br><span class="line"></span><br><span class="line">### 通过迭代器进行操作</span><br><span class="line"></span><br><span class="line">顺序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+
+<p>for (auto iter = vt.begin(); iter!=vt.end(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中：</span><br><span class="line"></span><br><span class="line">```*iter```是```vt```中遍历到的当前元素，在整个for循环中，从第一个元素开始，到最后一个元素结束；</span><br><span class="line"></span><br><span class="line">```vt.end()```是最后一个元素的下一个位置，因此不包括它；</span><br><span class="line"></span><br><span class="line">逆序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+
+<p>for ( vector<int>:: reverse_iterator iter = vt.rbegin();<br>        iter!=vt.rend(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</int></p>
+<pre><code>
+其中：
+
+```vector&lt;int&gt;:: reverse_iterator```为逆向遍历的迭代器的类型；
+
+```vt.rbegin()```为最后一个元素；
+
+```vt.rend()```为第一个元素的下一个位置（可以理解为前一个位置）
+
+**注意！！**
+
+```iter```仍然每次增加一，不要认为是逆序遍历就每次减一
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/25/C-迭代器的总结/" data-id="cjyu4uxlo0000dctmw2wumxmx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-踩坑：string-size-type引起的死循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/23/踩坑：string-size-type引起的死循环/" class="article-date">
@@ -100,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/23/踩坑：string-size-type引起的死循环/" data-id="cjyf93msj000238tmwkameqr7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/23/踩坑：string-size-type引起的死循环/" data-id="cjyu4uxo60004dctmtutba0pv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjyf93mra000038tm7x7kiv5e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjyu4uxo40003dctm4xh3mn2i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -185,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/21/选择排序/" data-id="cjyf93mso000538tm98nafu1m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/21/选择排序/" data-id="cjyu4uxow0006dctm5eyt42ji" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/19/冒泡排序/" data-id="cjyf93msi000138tmvmm09bf0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/19/冒泡排序/" data-id="cjyu4uxov0005dctmjpn3v8jq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/18/My-First-Hexo-File/" data-id="cjyf93msn000438tmw9fbakt6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/18/My-First-Hexo-File/" data-id="cjyu4uxo10002dctmzug3o5zy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/18/hello-world/" data-id="cjyf93msl000338tmog9sp4rs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/18/hello-world/" data-id="cjyu4uxox0007dctmnnlucgvd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +440,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
     </div>
   </div>
 
@@ -352,6 +453,14 @@
       <ul>
         
           <li>
+            <a href="/2019/08/02/快速排序/">快速排序</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/25/C-迭代器的总结/">C++迭代器的总结</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
           </li>
         
@@ -361,14 +470,6 @@
         
           <li>
             <a href="/2019/07/21/选择排序/">选择排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/19/冒泡排序/">冒泡排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/18/My-First-Hexo-File/">My First Hexo File</a>
           </li>
         
       </ul>
