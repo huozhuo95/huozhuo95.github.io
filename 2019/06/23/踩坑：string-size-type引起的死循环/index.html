@@ -5,21 +5,21 @@
   
 
   
-  <title>踩坑：string::size_type引起的死循环 | Hexo</title>
+  <title>踩坑：string::size_type引起的死循环 | Huo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="​        在C++的string类的应用中，常常会需要用到下标索引进行遍历，对字符串中的字符进行操作。在《C++ Primer》第五版中，介绍了string类的迭代器，它的类型是string::size_type，是个无符号的类型，可以用来遍历大型的字符串，这是int型的范围所达不到的。 问题​        然而，在某些情况中，定义一个string::size_type类型的下标，会导致">
 <meta property="og:type" content="article">
 <meta property="og:title" content="踩坑：string::size_type引起的死循环">
-<meta property="og:url" content="http://yoursite.com/2019/07/23/踩坑：string-size-type引起的死循环/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/index.html">
+<meta property="og:site_name" content="Huo">
 <meta property="og:description" content="​        在C++的string类的应用中，常常会需要用到下标索引进行遍历，对字符串中的字符进行操作。在《C++ Primer》第五版中，介绍了string类的迭代器，它的类型是string::size_type，是个无符号的类型，可以用来遍历大型的字符串，这是int型的范围所达不到的。 问题​        然而，在某些情况中，定义一个string::size_type类型的下标，会导致">
 <meta property="og:locale" content="Chinese">
-<meta property="og:updated_time" content="2019-07-23T03:19:27.853Z">
+<meta property="og:updated_time" content="2019-08-08T02:56:11.679Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="踩坑：string::size_type引起的死循环">
 <meta name="twitter:description" content="​        在C++的string类的应用中，常常会需要用到下标索引进行遍历，对字符串中的字符进行操作。在《C++ Primer》第五版中，介绍了string类的迭代器，它的类型是string::size_type，是个无符号的类型，可以用来遍历大型的字符串，这是int型的范围所达不到的。 问题​        然而，在某些情况中，定义一个string::size_type类型的下标，会导致">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Huo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,7 +38,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">Huo</a>
       </h1>
       
     </div>
@@ -66,8 +66,8 @@
       <div class="outer">
         <section id="main"><article id="post-踩坑：string-size-type引起的死循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/07/23/踩坑：string-size-type引起的死循环/" class="article-date">
-  <time datetime="2019-07-23T02:51:19.000Z" itemprop="datePublished">2019-07-23</time>
+    <a href="/2019/06/23/踩坑：string-size-type引起的死循环/" class="article-date">
+  <time datetime="2019-06-23T02:51:19.000Z" itemprop="datePublished">2019-06-23</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/23/踩坑：string-size-type引起的死循环/" data-id="cjyu4uxo60004dctmtutba0pv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/" data-id="cjz23plvc0008mwtmbrjfkkii" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +111,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/07/25/C-迭代器的总结/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/25/C-迭代器的总结/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -121,9 +121,9 @@
     </a>
   
   
-    <a href="/2019/07/22/C-各种进制的输入输出/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/04/06/归并排序/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">C++各种进制的输入输出</div>
+      <div class="article-nav-title">归并排序</div>
     </a>
   
 </nav>
@@ -147,7 +147,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -160,15 +160,7 @@
       <ul>
         
           <li>
-            <a href="/2019/08/02/快速排序/">快速排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/25/C-迭代器的总结/">C++迭代器的总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+            <a href="/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/">踩坑：if语句导致二叉搜索树中插入元素时报错</a>
           </li>
         
           <li>
@@ -176,7 +168,15 @@
           </li>
         
           <li>
-            <a href="/2019/07/21/选择排序/">选择排序</a>
+            <a href="/2019/06/25/C-迭代器的总结/">C++迭代器的总结</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+          </li>
+        
+          <li>
+            <a href="/2019/04/06/归并排序/">归并排序</a>
           </li>
         
       </ul>
