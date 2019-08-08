@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/" data-id="cjz23plvb0007mwtmczwgbq9d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/" data-id="cjz23wcm10007zotm9hm1rm8k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjz23pluz0000mwtmjtzbfxpp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjz23wclq0000zotm5vownhop" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,29 +188,29 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt;:: iterator iter = vt.begin();</span><br></pre></td></tr></table></figure>
 
 <p>其中：</p>
-<figure class="highlight plain"><figcaption><span>iterator```是迭代器的类型；</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```vt```是容器的对象名称；</span><br><span class="line"></span><br><span class="line">```iter```是迭代器的名称，初始指向容器的第一个元素。</span><br><span class="line"></span><br><span class="line">### 通过迭代器进行操作</span><br><span class="line"></span><br><span class="line">顺序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+<p><code>vector&lt;int&gt;:: iterator</code>是迭代器的类型；</p>
+<p><code>vt</code>是容器的对象名称；</p>
+<p><code>iter</code>是迭代器的名称，初始指向容器的第一个元素。</p>
+<h3 id="通过迭代器进行操作"><a href="#通过迭代器进行操作" class="headerlink" title="通过迭代器进行操作"></a>通过迭代器进行操作</h3><p>顺序遍历vector容器中的每个元素，对每个元素进行打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (auto iter = vt.begin(); iter!=vt.end(); iter++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; *iter &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p>for (auto iter = vt.begin(); iter!=vt.end(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">其中：</span><br><span class="line"></span><br><span class="line">```*iter```是```vt```中遍历到的当前元素，在整个for循环中，从第一个元素开始，到最后一个元素结束；</span><br><span class="line"></span><br><span class="line">```vt.end()```是最后一个元素的下一个位置，因此不包括它；</span><br><span class="line"></span><br><span class="line">逆序遍历vector容器中的每个元素，对每个元素进行打印：</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<p><code>*iter</code>是<code>vt</code>中遍历到的当前元素，在整个for循环中，从第一个元素开始，到最后一个元素结束；</p>
+<p><code>vt.end()</code>是最后一个元素的下一个位置，因此不包括它；</p>
+<p>逆序遍历vector容器中的每个元素，对每个元素进行打印：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for ( vector&lt;int&gt;:: reverse_iterator iter = vt.rbegin(); </span><br><span class="line">		iter!=vt.rend(); iter++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; *iter &lt;&lt; endl;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p>for ( vector<int>:: reverse_iterator iter = vt.rbegin();<br>        iter!=vt.rend(); iter++)<br>    {<br>        cout &lt;&lt; *iter &lt;&lt; endl;<br>    }</int></p>
-<pre><code>
-其中：
+<p>其中：</p>
+<p><code>vector&lt;int&gt;:: reverse_iterator</code>为逆向遍历的迭代器的类型；</p>
+<p><code>vt.rbegin()</code>为最后一个元素；</p>
+<p><code>vt.rend()</code>为第一个元素的下一个位置（可以理解为前一个位置）</p>
+<p><strong>注意！！</strong></p>
+<p><code>iter</code>仍然每次增加一，不要认为是逆序遍历就每次减一</p>
 
-```vector&lt;int&gt;:: reverse_iterator```为逆向遍历的迭代器的类型；
-
-```vt.rbegin()```为最后一个元素；
-
-```vt.rend()```为第一个元素的下一个位置（可以理解为前一个位置）
-
-**注意！！**
-
-```iter```仍然每次增加一，不要认为是逆序遍历就每次减一
-</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/25/C-迭代器的总结/" data-id="cjz23plv30001mwtmwpato3io" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/25/C-迭代器的总结/" data-id="cjz23wclv0001zotm0rjj705t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/" data-id="cjz23plvc0008mwtmbrjfkkii" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/" data-id="cjz23wcm20008zotmd7kb5leq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/06/归并排序/" data-id="cjz23plva0006mwtmcm8gc3k2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/06/归并排序/" data-id="cjz23wclz0004zotmm4vsf9ex" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/02/快速排序/" data-id="cjz23plv80005mwtm97z5yza8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/02/快速排序/" data-id="cjz23wcm10006zotm9yvackc3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/21/选择排序/" data-id="cjz23plvd0009mwtm57vrlb5u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/21/选择排序/" data-id="cjz23wcm30009zotmzttlldos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -423,45 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/19/冒泡排序/" data-id="cjz23plv80004mwtm1pyxuyn7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-My-First-Hexo-File" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/18/My-First-Hexo-File/" class="article-date">
-  <time datetime="2019-03-18T12:59:03.000Z" itemprop="datePublished">2019-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/18/My-First-Hexo-File/">My First Hexo File</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>write something.</p>
-<p>我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/My-First-Hexo-File/" data-id="cjz23plv50002mwtmjtuyneq3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/19/冒泡排序/" data-id="cjz23wcly0003zotmp989di3y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -510,7 +472,45 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/hello-world/" data-id="cjz23plv60003mwtmba0zdx06" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/18/hello-world/" data-id="cjz23wclw0002zotma8k2nvq2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-My-First-Hexo-File" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/18/My-First-Hexo-File/" class="article-date">
+  <time datetime="2019-03-18T12:59:03.000Z" itemprop="datePublished">2019-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/18/My-First-Hexo-File/">My First Hexo File</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>write something.</p>
+<p>我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/18/My-First-Hexo-File/" data-id="cjz23wcm00005zotmn29yvbwd" class="article-share-link">Share</a>
       
       
     </footer>
