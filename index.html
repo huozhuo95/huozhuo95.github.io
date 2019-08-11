@@ -62,6 +62,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-插入排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/11/插入排序/" class="article-date">
+  <time datetime="2019-08-11T08:54:49.000Z" itemprop="datePublished">2019-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/11/插入排序/">插入排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>从第二个元素开始，与它前面的元素进行比较，如果小，就交换，这样前两个元素是有序的了，</p>
+<p>再看第三个元素，将它与前面的元素比较，如果小，就往前换，直到碰到比它小或相等的为止，</p>
+<p>再看第四个元素……直到最后一个元素也找到了它的位置，排序完成。</p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>与冒泡、选择排序同为低级排序</p>
+<p>时间复杂度：平均和最坏为O(n^2)，最优为O(n)</p>
+<p>稳定性：稳定</p>
+<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//把选择排序的函数做成函数模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Insertion_sort</span>(<span class="title">T</span>* <span class="title">a</span>, <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> in, out;</span><br><span class="line">	<span class="comment">//外层循环，是选取一个元素，将它往它前面的有序数组里面插入</span></span><br><span class="line">	<span class="keyword">for</span> (out = <span class="number">1</span>; out &lt; n; out++)</span><br><span class="line">	&#123;</span><br><span class="line">		T temp = a[out];<span class="comment">//从第二个元素开始，把这个元素提出来，准备后续比较</span></span><br><span class="line">		in = out;<span class="comment">//这里先让in为提出来的元素的索引，准备开始循环</span></span><br><span class="line">		<span class="keyword">while</span> (in &gt; <span class="number">0</span> &amp;&amp; a[in - <span class="number">1</span>] &gt; temp)<span class="comment">//索引到头了或者前面的元素比temp小，就不再操作了</span></span><br><span class="line">		&#123;</span><br><span class="line">			a[in] = a[in - <span class="number">1</span>];<span class="comment">//如果前面的元素比temp大，就把前面的元素往它后面一个元素赋值</span></span><br><span class="line">			in--;<span class="comment">//索引往前移一位，准备下次判断</span></span><br><span class="line">		&#125;</span><br><span class="line">		a[in] = temp;<span class="comment">//把存放在temp的元素放在合适的位置</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试主函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argv,<span class="keyword">char</span>* argc[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ls[] = &#123; <span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">7</span> &#125;;</span><br><span class="line">	insertion_sort(ls, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; ls[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/11/插入排序/" data-id="cjz6rejfz0002cstmzt5epbr1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-踩坑：if语句导致二叉搜索树中插入元素时报错" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/" class="article-date">
@@ -108,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/" data-id="cjz23wcm10007zotm9hm1rm8k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/" data-id="cjz6rejh70009cstm5a7sf5no" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjz23wclq0000zotm5vownhop" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="cjz6rejg50005cstmoqm0eax5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/25/C-迭代器的总结/" data-id="cjz23wclv0001zotm0rjj705t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/25/C-迭代器的总结/" data-id="cjz6rejg70006cstmop0ziqoh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/" data-id="cjz23wcm20008zotmd7kb5leq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/23/踩坑：string-size-type引起的死循环/" data-id="cjz6rejg80008cstm9it0z9zs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/06/归并排序/" data-id="cjz23wclz0004zotmm4vsf9ex" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/06/归并排序/" data-id="cjz6rejg10003cstmkm7vd0ck" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/02/快速排序/" data-id="cjz23wcm10006zotm9yvackc3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/02/快速排序/" data-id="cjz6rejg40004cstm1gacolxl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/21/选择排序/" data-id="cjz23wcm30009zotmzttlldos" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/21/选择排序/" data-id="cjz6rejh8000acstmkm6apsl2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -423,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/19/冒泡排序/" data-id="cjz23wcly0003zotmp989di3y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/19/冒泡排序/" data-id="cjz6rejg80007cstm1xcjcisb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -472,45 +516,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/hello-world/" data-id="cjz23wclw0002zotma8k2nvq2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-My-First-Hexo-File" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/18/My-First-Hexo-File/" class="article-date">
-  <time datetime="2019-03-18T12:59:03.000Z" itemprop="datePublished">2019-03-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/18/My-First-Hexo-File/">My First Hexo File</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>write something.</p>
-<p>我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/My-First-Hexo-File/" data-id="cjz23wcm00005zotmn29yvbwd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/18/hello-world/" data-id="cjz6rejfy0001cstm1mkq1kap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -521,6 +527,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -551,6 +562,10 @@
       <ul>
         
           <li>
+            <a href="/2019/08/11/插入排序/">插入排序</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/">踩坑：if语句导致二叉搜索树中插入元素时报错</a>
           </li>
         
@@ -564,10 +579,6 @@
         
           <li>
             <a href="/2019/06/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/06/归并排序/">归并排序</a>
           </li>
         
       </ul>
