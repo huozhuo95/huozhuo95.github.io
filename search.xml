@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[if语句导致二叉搜索树中插入元素时报错]]></title>
+    <url>%2F2019%2F08%2F08%2Fif%E8%AF%AD%E5%8F%A5%E5%AF%BC%E8%87%B4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E6%8F%92%E5%85%A5%E5%85%83%E7%B4%A0%E6%97%B6%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[前言​ 二叉搜索树是一种特殊的二叉树，特点是根节点的左子节点永远比它小，而它的右子节点永远比它大。用二叉搜索树进行查找和插入速度都很快，因此是一种常用的数据结构。 ​ 由于它的特性，在实现二叉搜索树的数据结构的过程中，比如插入、搜索的功能，会在成员函数的实现里用到很多if语句，用来判断元素的大小。本文针对if语句造成的问题进行分析，以此避免今后类似的错误。 问题​ 执行二叉搜索树的插入函数，试图将一系列元素依次插入二叉树中，插入函数如下所示： 12345678910111213141516171819202122232425262728293031323334353637/*BinaryTree&lt;T&gt;为自己设计的二叉搜索树的类，数据成员root为指向根节点的指针TreeNode&lt;T&gt;为自己设计的节点类，数据成员data为数据元素，left_child和right_child分别为左右子节点的指针以下为成员函数insert，将参数item插入到二叉树中合适的位置，如果成功插入，返回真*///插入数据元素节点template&lt;class T&gt;bool BinaryTree&lt;T&gt;::insert(const T&amp; item)&#123; TreeNode&lt;T&gt;* p = root;//p用来遍历二叉树，要查找item该插入的位置 TreeNode&lt;T&gt;* q = 0;//q指向p的根结点 while (p) &#123; q = p;//保存p节点的指针 if (item == p-&gt;data)//如果重复，添加节点失败 return false; if (item &lt; p-&gt;data)//小于根，就放左边 p = p-&gt;left_child; if (item &gt; p-&gt;data)//大于根，就放右边 p = p-&gt;right_child; &#125; //退出循环的时候，找到的位置就是q的下面 //创建新的节点并初始化 p = new TreeNode&lt;T&gt;; p-&gt;left_child = 0; p-&gt;right_child = 0; p-&gt;data = item; if (root == 0)//如果树根为NULL，就直接把root指向新节点 root = p; else if (item &lt; q-&gt;data) q-&gt;left_child = p; else q-&gt;right_child = p; return true;&#125; ​ 乍一看没什么问题，也能够通过编译，甚至运行的时候也能插入元素，比如：先插入1，再插入2。 1234BinaryTree&lt;int&gt; btree;bool yes;yes=btree.insert(1);yes=btree.insert(2); ​ 然而，如果先插入2，再插入1，就会报错，错误出现在while语句中第三个if语句if (item &gt; p-&gt;data)这一行，错误信息： 引发了异常: 读取访问权限冲突。p 是 nullptr。 问题分析​ 通过分析发现，原来是因为在这段代码的执行过程中 12345678910while (p)&#123; q = p;//保存p节点的指针 if (item == p-&gt;data)//如果重复，添加节点失败 return false; if (item &lt; p-&gt;data)//小于根，就放左边 p = p-&gt;left_child; if (item &gt; p-&gt;data)//大于根，就放右边 p = p-&gt;right_child;&#125; 如果item比p-&gt;data小，会执行完p = p-&gt;left_child;之后，继续执行if语句if (item &gt; p-&gt;data)，这是由于p已经指向NULL了，所以无法得到p-&gt;data，所以系统会抛出异常。 解决办法​ 知道原因，解决起来就很容易了，只需把上面的while语句中的第8行改为else就可以了，这样就不会在item小于当前节点的元素的情况下，再做没有意义判断了，改完之后的while循环如下： 12345678910while (p)&#123; q = p;//保存p节点的指针 if (item == p-&gt;data)//如果重复，添加节点失败 return false; if (item &lt; p-&gt;data)//小于根，就放左边 p = p-&gt;left_child; else//大于根，就放右边 p = p-&gt;right_child;&#125; ​ 此时随便插入元素，不会再报错 123456BinaryTree&lt;int&gt; btree;bool yes;yes = btree.insert(2);yes = btree.insert(1);yes = btree.insert(6);yes = btree.insert(4);]]></content>
+      <tags>
+        <tag>踩坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++各种进制的输入输出]]></title>
+    <url>%2F2019%2F07%2F22%2FC-%E5%90%84%E7%A7%8D%E8%BF%9B%E5%88%B6%E7%9A%84%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%2F</url>
+    <content type="text"><![CDATA[​ C++中整数的输入输出常用10进制表示，当要使用二进制、八进制、十六进制的时候，怎样进行输入和输出操作呢？ cin和cout的操作​ 对于八进制和十六进制，要记住关键字oct和hex，要在运算符和变量之间添加，代码如下 12345678910int num1 = 0;int num2 = 0;cin &gt;&gt; oct &gt;&gt; num1;//以八进制格式输入，如：011（即9）cout &lt;&lt; num1 &lt;&lt; endl;//默认输出十进制，结果为：9cout &lt;&lt; hex &lt;&lt; num1 &lt;&lt; endl;//改为十六进制输出，结果为：9cin &gt;&gt; hex &gt;&gt; num2;//以十六进制格式输入，如：0xF（即15）cout &lt;&lt; oct &lt;&lt; num2 &lt;&lt; endl;//八进制输出，结果为：17cout &lt;&lt; num2 &lt;&lt; endl;//输出格式还是八进制：17cout &lt;&lt; dec;//要手动改回十进制 ​ 对于二进制，要用到标准库的bitset，代码如下 1234567891011121314151617#include&lt;iostream&gt;#include&lt;bitset&gt;//要包含这个bitset头文件using namespace std;int main()&#123; bitset&lt;10&gt; bits;//bits有10位（可改为任意位数），初始值每位都是0 cin &gt;&gt; bits;//直接输入二进制数，如：10110 cout &lt;&lt;dec&lt;&lt; bits;//输出的是二进制 cout &lt;&lt; endl; bitset&lt;6&gt; bit2(5);//利用构造函数，把十进制转换成二进制 cout &lt;&lt; bit2 &lt;&lt; endl;//结果为：000101 cout &lt;&lt;bit2.to_ulong() &lt;&lt; endl;//把上述的二进制数转换成十进制，结果为：5 return 0;&#125;]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[string::size_type引起的死循环]]></title>
+    <url>%2F2019%2F07%2F10%2Fstring-size-type%E5%BC%95%E8%B5%B7%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF%2F</url>
+    <content type="text"><![CDATA[​ 在C++的string类的应用中，常常会需要用到下标索引进行遍历，对字符串中的字符进行操作。在《C++ Primer》第五版中，介绍了string类的迭代器，它的类型是string::size_type，是个无符号的类型，可以用来遍历大型的字符串，这是int型的范围所达不到的。 问题​ 然而，在某些情况中，定义一个string::size_type类型的下标，会导致意想不到的死循环。 例如： 1234string str="test string";string::size_type index=str.size()-1;//下标从最后一个字符开始for(;index&gt;=0;index--)//从后往前遍历，逆序输出每个字符 cout&lt;&lt;str[index]; 这里程序会报错！！进入无限循环 ​ 原因在于string::size_type类型变量index是一个无符号的数，不能用index--的语句变为负数。因此循环会无限执行下去。 解决办法​ 将下标index的类型定义成常规的类型，可以在逆序遍历时，避免这样的问题。如果字符串较大，可以用long long类型，它是C++ 11的64位整型的基本类型，占8个字节（而int型和long型占4个字节），long long可以表示的范围是[−2^63,2^63−1]。 ​ 把上面代码的第二行改为如下所示 1long long index=str.size()-1;//将str.size()-1 转换为long long型赋值给index ​ 输出结果为：gnirts tset]]></content>
+      <tags>
+        <tag>踩坑</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[归并排序]]></title>
+    <url>%2F2019%2F07%2F06%2F%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[思路采用分治法，将数组不断二分，每个元素单独为一组之后，再将相邻的元素进行组合。 组合的时候用两个下标对相邻两个数组分别进行遍历，依次从小到大把两个数组元素放入新的数组。 特点时间复杂度：最优最坏都为O(nlogn) 稳定性：稳定 缺点：需要额外的空间 参考代码]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[快速排序]]></title>
+    <url>%2F2019%2F07%2F02%2F%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[思路选取最左边数为枢轴，定义两个游标i和j分别指向两端，定义一个变量临时存放枢轴；j向左移找出小于枢轴的放在i的位置，i向右移找出大于等于枢轴的放右边的位置，依次交替；直到i与j重合，把枢轴赋值给中间的位置(即i)，再递归枢轴的前半和后半部分。 特点时间复杂度：平均O(nlogn)，最慢O(n^2) 稳定性：不稳定 优点：平均速度快 参考代码1234567891011121314151617181920212223242526272829303132333435363738394041424344#include&lt;iostream&gt;using namespace std;template&lt;class T&gt;//用函数模板定义void quick_sort(T* a, const int left, const int right)&#123; if (left &lt; right)//递归出口为left&gt;=right &#123; //定义指针i和j，这两个指针从两端向中间移动 int i = left; int j = right; T pivot = a[left];//选取最左边的元素为基准，同时也能给a[i]腾出位置 while (i &lt; j) &#123; while (i &lt; j &amp;&amp; a[j] &gt;= pivot)j--;//大的放右边，所以从右向左找出比pivot小的元素 if (i &lt; j) &#123; a[i] = a[j];//前面已经给a[i]腾出位置了，现在可以把小元素a[j]放在a[i]的位置 i++;//i的指针向右移，准备后续判断 &#125; while (i &lt; j &amp;&amp; a[i] &lt; pivot)i++;//小的放左边，i向右移直到发现a[i]不比pivot小 if (i &lt; j) &#123; a[j] = a[i];//由于前面a[j]的值赋值给了前面的位置，所以a[j]的位置空出来了 j--;//j的指针向左移，准备下一轮的循环 &#125; &#125; a[i] = pivot;//当i=j的时候退出循环，此时的a[i]是空出的位置 quick_sort(a, left, i - 1); quick_sort(a, i + 1, right); &#125;&#125;//测试函数int main(int argc, char* argv[])&#123; int k[] = &#123; 6,4,2,8,5,7,2,3,9,0,1 &#125;; for (int i = 0; i &lt;= 10; i++) cout &lt;&lt; k[i]; cout &lt;&lt; endl;//输出为64285723901 quick_sort(k, 0, 10); for (int i = 0; i &lt;= 10; i++) cout &lt;&lt; k[i]; cout &lt;&lt; endl;//输出为01223456789 return 0;&#125;]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[插入排序]]></title>
+    <url>%2F2019%2F06%2F28%2F%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[思路从第二个元素开始，与它前面的元素进行比较，如果小，就交换，这样前两个元素是有序的了， 再看第三个元素，将它与前面的元素比较，如果小，就往前换，直到碰到比它小或相等的为止， 再看第四个元素……直到最后一个元素也找到了它的位置，排序完成。 特点与冒泡、选择排序同为低级排序 时间复杂度：平均和最坏为O(n^2)，最优为O(n) 稳定性：稳定 参考代码1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;using namespace std;//把选择排序的函数做成函数模板template&lt;class T&gt;void Insertion_sort(T* a, int n)&#123; int in, out; //外层循环，是选取一个元素，将它往它前面的有序数组里面插入 for (out = 1; out &lt; n; out++) &#123; T temp = a[out];//从第二个元素开始，把这个元素提出来，准备后续比较 in = out;//这里先让in为提出来的元素的索引，准备开始循环 while (in &gt; 0 &amp;&amp; a[in - 1] &gt; temp)//索引到头了或者前面的元素比temp小，就不再操作了 &#123; a[in] = a[in - 1];//如果前面的元素比temp大，就把前面的元素往它后面一个元素赋值 in--;//索引往前移一位，准备下次判断 &#125; a[in] = temp;//把存放在temp的元素放在合适的位置 &#125;&#125;//测试主函数int main(int argv,char* argc[])&#123; int ls[] = &#123; 5,2,6,8,9,4,3,1,0,7 &#125;; insertion_sort(ls, 10); for (int i = 0; i &lt; 10; i++) cout &lt;&lt; ls[i]; cout &lt;&lt; endl; return 0;&#125;]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++迭代器的总结]]></title>
+    <url>%2F2019%2F06%2F25%2FC-%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[C++迭代器是用来遍历容器（vector，set，list，map等）的工具，也可以用来遍历string，可以把它当作指针来理解，根据不同的容器，用法如下： vector获取迭代器对于一个已经初始化了的vector对象，可以通过以下语句获取迭代器： 1vector&lt;int&gt;:: iterator iter = vt.begin(); 其中： vector&lt;int&gt;:: iterator是迭代器的类型； vt是容器的对象名称； iter是迭代器的名称，初始指向容器的第一个元素。 通过迭代器进行操作顺序遍历vector容器中的每个元素，对每个元素进行打印： 1234for (auto iter = vt.begin(); iter!=vt.end(); iter++) &#123; cout &lt;&lt; *iter &lt;&lt; endl; &#125; 其中： *iter是vt中遍历到的当前元素，在整个for循环中，从第一个元素开始，到最后一个元素结束； vt.end()是最后一个元素的下一个位置，因此不包括它； 逆序遍历vector容器中的每个元素，对每个元素进行打印： 12345for ( vector&lt;int&gt;:: reverse_iterator iter = vt.rbegin(); iter!=vt.rend(); iter++) &#123; cout &lt;&lt; *iter &lt;&lt; endl; &#125; 其中： vector&lt;int&gt;:: reverse_iterator为逆向遍历的迭代器的类型； vt.rbegin()为最后一个元素； vt.rend()为第一个元素的下一个位置（可以理解为前一个位置） 注意！！ iter仍然每次增加一，不要认为是逆序遍历就每次减一]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[选择排序]]></title>
+    <url>%2F2019%2F06%2F11%2F%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[思路选择排序，从当前未排序的数组中，找出最小的一个数，把它放在最左边，再找出第二小的，放在左边第二的位置，以此类推 特点和冒泡排序属于一个档次，很低级，虽然比它强一点 时间复杂度：O(n^2) 稳定性：不稳定 参考代码123456789101112131415161718192021222324252627282930313233343536#include&lt;iostream&gt;using namespace std;void selection_sort(int* arr, const int n)&#123; //j表示：在这个循环体中，要把未排序的最小元素放在arr[j]的位置 //因此，只需遍历到倒数第二个元素 for (int j = 0; j &lt; n - 1; j++) &#123; //min为下标，用来记录未排序部分的最小数，初始化为当前第一个数 int min = j; //从当前第二个数开始遍历，直到数组末尾，找出这段区间内最小的数 for (int i = j + 1; i &lt; n; i++) &#123; if (arr[i] &lt; arr[min]) min = i; &#125; //将最小的数放在当前未排序数组的第一个位置 swap(arr[j], arr[min]); &#125;&#125;//测试主函数int main(int argc,char* argv[])&#123; cout &lt;&lt; "选择排序:" &lt;&lt; endl; int x[] = &#123; 6,1,5,9,1,4,0,7,3,2 &#125;; for (int i = 0; i &lt; 10; i++) cout &lt;&lt; x[i]; cout &lt;&lt; endl; selection_sort(x, 10);//第一个参数为指针，x指向数组的第一个元素 for (int i=0; i &lt; 10; i++) cout &lt;&lt; x[i]; cout &lt;&lt; endl; return 0;&#125;]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[冒泡排序]]></title>
+    <url>%2F2019%2F06%2F01%2F%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[思路从左边开始两个相邻的数比较，选择最大的数据放在右边，此时第二个数为大的，然后把第二个数与第三个数比较，选择大的放右边，此时第三个数为大的，然后比较第三个和第四个，以此类推，直到右端，此时数组中最大的数在最右了。然后，重复最开始的比较，从左到右找出最大的数放在右端第二的位置，然后，再次重复最开始的比较，找出右端第三的位置的数……直到最左端的数都排完了。 特点时间复杂度：O(n^2)稳定性：稳定优点：简单，好理解缺点：速度慢，不常用 参考代码1234567891011121314151617181920212223242526272829303132#include&lt;iostream&gt;using namespace std;//冒泡排序函数的实现void bubble_sort(int* arr, int n)&#123; for(int i=0;i&lt;n-1;i++) &#123; for(int j=0;j&lt;n-i-1;j++)//注意这里判断条件是n-i-1 &#123; if(arr[j]&gt;arr[j+1]) &#123; //此处可以用std::swap函数来进行交换 int temp=arr[j]; arr[j]=arr[j+1]; arr[j+1]=temp; &#125; &#125; &#125;&#125;//测试函数int main(int argc, char* argv[])&#123; int ls[10]=&#123; 1,3,5,8,0,4,6,7,5,9 &#125;; for (int i = 0; i &lt; 10; i++) cout &lt;&lt; *(ls + i);//看原始数组 cout&lt;&lt; endl; bubble_sort(ls, 10);//第一个参数传入数组ls的指针 for (int i = 0; i &lt; 10; i++) cout &lt;&lt; *(ls + i);//看排序之后的数组 cout&lt;&lt; endl; return 0;&#125;]]></content>
+      <tags>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F05%2F29%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[My First Hexo File]]></title>
+    <url>%2F2019%2F05%2F29%2FMy-First-Hexo-File%2F</url>
+    <content type="text"><![CDATA[我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。]]></content>
+  </entry>
+</search>

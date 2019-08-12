@@ -5,17 +5,18 @@
   
 
   
-  <title>Huo</title>
+  <title>霍 茁</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Huo">
+<meta property="og:title" content="霍 茁">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
-<meta property="og:site_name" content="Huo">
-<meta property="og:locale" content="Chinese">
+<meta property="og:site_name" content="霍 茁">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Huo">
+<meta name="twitter:title" content="霍 茁">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;github.com&#x2F;huozhuo95">
   
-    <link rel="alternate" href="/atom.xml" title="Huo" type="application/atom+xml">
+    <link rel="alternate" href="https://github.com/huozhuo95" title="霍 茁" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -34,7 +35,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Huo</a>
+        <a href="/" id="logo">霍 茁</a>
       </h1>
       
     </div>
@@ -49,9 +50,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="https://github.com/huozhuo95" title="GitHub主页"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -62,10 +63,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-My-First-Hexo-File" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-归并排序" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/18/My-First-Hexo-File/" class="article-date">
-  <time datetime="2019-03-18T12:59:03.000Z" itemprop="datePublished">2019-03-18</time>
+    <a href="/2019/07/06/归并排序/" class="article-date">
+  <time datetime="2019-07-06T08:10:26.000Z" itemprop="datePublished">2019-07-06</time>
 </a>
     
   </div>
@@ -76,7 +77,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/18/My-First-Hexo-File/">My First Hexo File</a>
+      <a class="article-title" href="/2019/07/06/归并排序/">归并排序</a>
     </h1>
   
 
@@ -84,15 +85,110 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>write something.</p>
-<p>我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。</p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>采用分治法，将数组不断二分，每个元素单独为一组之后，再将相邻的元素进行组合。</p>
+<p>组合的时候用两个下标对相邻两个数组分别进行遍历，依次从小到大把两个数组元素放入新的数组。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>时间复杂度：最优最坏都为O(nlogn)</p>
+<p>稳定性：稳定</p>
+<p>缺点：需要额外的空间</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/06/归并排序/" data-id="cjz8dlq3v0005y4tm2529grgo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-快速排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/02/快速排序/" class="article-date">
+  <time datetime="2019-07-02T13:05:04.000Z" itemprop="datePublished">2019-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/02/快速排序/">快速排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>选取最左边数为枢轴，定义两个游标i和j分别指向两端，定义一个变量临时存放枢轴；<br>j向左移找出小于枢轴的放在i的位置，i向右移找出大于等于枢轴的放右边的位置，依次交替；<br>直到i与j重合，把枢轴赋值给中间的位置(即i)，再递归枢轴的前半和后半部分。</p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><p>时间复杂度：平均O(nlogn)，最慢O(n^2)</p>
+<p>稳定性：不稳定</p>
+<p>优点：平均速度快</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;//用函数模板定义</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">quick_sort</span>(<span class="title">T</span>* <span class="title">a</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">left</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">right</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">if</span> (left &lt; right)<span class="comment">//递归出口为left&gt;=right</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//定义指针i和j，这两个指针从两端向中间移动</span></span><br><span class="line">		<span class="keyword">int</span> i = left;  </span><br><span class="line">		<span class="keyword">int</span> j = right;</span><br><span class="line">		T pivot = a[left];<span class="comment">//选取最左边的元素为基准，同时也能给a[i]腾出位置</span></span><br><span class="line">		<span class="keyword">while</span> (i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] &gt;= pivot)j--;<span class="comment">//大的放右边，所以从右向左找出比pivot小的元素</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			&#123;</span><br><span class="line">				a[i] = a[j];<span class="comment">//前面已经给a[i]腾出位置了，现在可以把小元素a[j]放在a[i]的位置</span></span><br><span class="line">				i++;<span class="comment">//i的指针向右移，准备后续判断</span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; pivot)i++;<span class="comment">//小的放左边，i向右移直到发现a[i]不比pivot小</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			&#123;</span><br><span class="line">				a[j] = a[i];<span class="comment">//由于前面a[j]的值赋值给了前面的位置，所以a[j]的位置空出来了</span></span><br><span class="line">				j--;<span class="comment">//j的指针向左移，准备下一轮的循环</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		a[i] = pivot;<span class="comment">//当i=j的时候退出循环，此时的a[i]是空出的位置</span></span><br><span class="line">		quick_sort(a, left, i - <span class="number">1</span>);</span><br><span class="line">		quick_sort(a, i + <span class="number">1</span>, right);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> k[] = &#123; <span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">1</span> &#125;;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出为64285723901</span></span><br><span class="line">	quick_sort(k, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//输出为01223456789</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/My-First-Hexo-File/" data-id="cjz6rejdl0000cstmpkdaly1e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/02/快速排序/" data-id="cjz8dlq3x0008y4tmr824f2lk" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-插入排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/28/插入排序/" class="article-date">
+  <time datetime="2019-06-28T08:54:49.000Z" itemprop="datePublished">2019-06-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/28/插入排序/">插入排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>从第二个元素开始，与它前面的元素进行比较，如果小，就交换，这样前两个元素是有序的了，</p>
+<p>再看第三个元素，将它与前面的元素比较，如果小，就往前换，直到碰到比它小或相等的为止，</p>
+<p>再看第四个元素……直到最后一个元素也找到了它的位置，排序完成。</p>
+<h1 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h1><p>与冒泡、选择排序同为低级排序</p>
+<p>时间复杂度：平均和最坏为O(n^2)，最优为O(n)</p>
+<p>稳定性：稳定</p>
+<h1 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//把选择排序的函数做成函数模板</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Insertion_sort</span>(<span class="title">T</span>* <span class="title">a</span>, <span class="title">int</span> <span class="title">n</span>)</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> in, out;</span><br><span class="line">	<span class="comment">//外层循环，是选取一个元素，将它往它前面的有序数组里面插入</span></span><br><span class="line">	<span class="keyword">for</span> (out = <span class="number">1</span>; out &lt; n; out++)</span><br><span class="line">	&#123;</span><br><span class="line">		T temp = a[out];<span class="comment">//从第二个元素开始，把这个元素提出来，准备后续比较</span></span><br><span class="line">		in = out;<span class="comment">//这里先让in为提出来的元素的索引，准备开始循环</span></span><br><span class="line">		<span class="keyword">while</span> (in &gt; <span class="number">0</span> &amp;&amp; a[in - <span class="number">1</span>] &gt; temp)<span class="comment">//索引到头了或者前面的元素比temp小，就不再操作了</span></span><br><span class="line">		&#123;</span><br><span class="line">			a[in] = a[in - <span class="number">1</span>];<span class="comment">//如果前面的元素比temp大，就把前面的元素往它后面一个元素赋值</span></span><br><span class="line">			in--;<span class="comment">//索引往前移一位，准备下次判断</span></span><br><span class="line">		&#125;</span><br><span class="line">		a[in] = temp;<span class="comment">//把存放在temp的元素放在合适的位置</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试主函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argv,<span class="keyword">char</span>* argc[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ls[] = &#123; <span class="number">5</span>,<span class="number">2</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">7</span> &#125;;</span><br><span class="line">	insertion_sort(ls, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; ls[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/28/插入排序/" data-id="cjz8dlq3w0006y4tmnsnnu7ru" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
     </footer>
   </div>
   
@@ -104,7 +200,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -115,15 +211,10 @@
 
   
     
-
-  
-    
-  
-    
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑/">踩坑</a></li></ul>
     </div>
   </div>
 
@@ -131,16 +222,22 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2019/08/11/插入排序/">插入排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/08/踩坑：if语句导致二叉搜索树中插入元素时报错/">踩坑：if语句导致二叉搜索树中插入元素时报错</a>
+            <a href="/2019/08/08/if语句导致二叉搜索树中插入元素时报错/">if语句导致二叉搜索树中插入元素时报错</a>
           </li>
         
           <li>
@@ -148,11 +245,15 @@
           </li>
         
           <li>
-            <a href="/2019/06/25/C-迭代器的总结/">C++迭代器的总结</a>
+            <a href="/2019/07/10/string-size-type引起的死循环/">string::size_type引起的死循环</a>
           </li>
         
           <li>
-            <a href="/2019/06/23/踩坑：string-size-type引起的死循环/">踩坑：string::size_type引起的死循环</a>
+            <a href="/2019/07/06/归并排序/">归并排序</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/02/快速排序/">快速排序</a>
           </li>
         
       </ul>
