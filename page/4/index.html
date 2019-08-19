@@ -63,6 +63,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-冒泡排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/01/冒泡排序/" class="article-date">
+  <time datetime="2019-06-01T13:20:55.000Z" itemprop="datePublished">2019-06-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/01/冒泡排序/">冒泡排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="&#x601D;&#x8DEF;"><a href="#&#x601D;&#x8DEF;" class="headerlink" title="&#x601D;&#x8DEF;"></a>&#x601D;&#x8DEF;</h2><p>&#x4ECE;&#x5DE6;&#x8FB9;&#x5F00;&#x59CB;&#x4E24;&#x4E2A;&#x76F8;&#x90BB;&#x7684;&#x6570;&#x6BD4;&#x8F83;&#xFF0C;&#x9009;&#x62E9;&#x6700;&#x5927;&#x7684;&#x6570;&#x636E;&#x653E;&#x5728;&#x53F3;&#x8FB9;&#xFF0C;<br>&#x6B64;&#x65F6;&#x7B2C;&#x4E8C;&#x4E2A;&#x6570;&#x4E3A;&#x5927;&#x7684;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x7B2C;&#x4E8C;&#x4E2A;&#x6570;&#x4E0E;&#x7B2C;&#x4E09;&#x4E2A;&#x6570;&#x6BD4;&#x8F83;&#xFF0C;&#x9009;&#x62E9;&#x5927;&#x7684;&#x653E;&#x53F3;&#x8FB9;&#xFF0C;<br>&#x6B64;&#x65F6;&#x7B2C;&#x4E09;&#x4E2A;&#x6570;&#x4E3A;&#x5927;&#x7684;&#xFF0C;&#x7136;&#x540E;&#x6BD4;&#x8F83;&#x7B2C;&#x4E09;&#x4E2A;&#x548C;&#x7B2C;&#x56DB;&#x4E2A;&#xFF0C;&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#xFF0C;&#x76F4;&#x5230;&#x53F3;&#x7AEF;&#xFF0C;&#x6B64;&#x65F6;&#x6570;&#x7EC4;&#x4E2D;&#x6700;&#x5927;&#x7684;&#x6570;&#x5728;&#x6700;&#x53F3;&#x4E86;&#x3002;<br>&#x7136;&#x540E;&#xFF0C;&#x91CD;&#x590D;&#x6700;&#x5F00;&#x59CB;&#x7684;&#x6BD4;&#x8F83;&#xFF0C;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#x627E;&#x51FA;&#x6700;&#x5927;&#x7684;&#x6570;&#x653E;&#x5728;&#x53F3;&#x7AEF;&#x7B2C;&#x4E8C;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;<br>&#x7136;&#x540E;&#xFF0C;&#x518D;&#x6B21;&#x91CD;&#x590D;&#x6700;&#x5F00;&#x59CB;&#x7684;&#x6BD4;&#x8F83;&#xFF0C;&#x627E;&#x51FA;&#x53F3;&#x7AEF;&#x7B2C;&#x4E09;&#x7684;&#x4F4D;&#x7F6E;&#x7684;&#x6570;&#x2026;&#x2026;<br>&#x76F4;&#x5230;&#x6700;&#x5DE6;&#x7AEF;&#x7684;&#x6570;&#x90FD;&#x6392;&#x5B8C;&#x4E86;&#x3002;</p>
+<h2 id="&#x7279;&#x70B9;"><a href="#&#x7279;&#x70B9;" class="headerlink" title="&#x7279;&#x70B9;"></a>&#x7279;&#x70B9;</h2><p>&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;O(n^2)<br>&#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;<br>&#x4F18;&#x70B9;&#xFF1A;&#x7B80;&#x5355;&#xFF0C;&#x597D;&#x7406;&#x89E3;<br>&#x7F3A;&#x70B9;&#xFF1A;&#x901F;&#x5EA6;&#x6162;&#xFF0C;&#x4E0D;&#x5E38;&#x7528;</p>
+<h2 id="&#x53C2;&#x8003;&#x4EE3;&#x7801;"><a href="#&#x53C2;&#x8003;&#x4EE3;&#x7801;" class="headerlink" title="&#x53C2;&#x8003;&#x4EE3;&#x7801;"></a>&#x53C2;&#x8003;&#x4EE3;&#x7801;</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">//&#x5192;&#x6CE1;&#x6392;&#x5E8F;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="keyword">int</span>* arr, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)</span><br><span class="line">	{</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;n-i<span class="number">-1</span>;j++)<span class="comment">//&#x6CE8;&#x610F;&#x8FD9;&#x91CC;&#x5224;&#x65AD;&#x6761;&#x4EF6;&#x662F;n-i-1</span></span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>])</span><br><span class="line">				{	</span><br><span class="line">					<span class="comment">//&#x6B64;&#x5904;&#x53EF;&#x4EE5;&#x7528;std::swap&#x51FD;&#x6570;&#x6765;&#x8FDB;&#x884C;&#x4EA4;&#x6362;</span></span><br><span class="line">					<span class="keyword">int</span> temp=arr[j];</span><br><span class="line">					arr[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">					arr[j+<span class="number">1</span>]=temp;</span><br><span class="line">				}</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="comment">//&#x6D4B;&#x8BD5;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> ls[<span class="number">10</span>]={ <span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">5</span>,<span class="number">9</span> };</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *(ls + i);<span class="comment">//&#x770B;&#x539F;&#x59CB;&#x6570;&#x7EC4;</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	bubble_sort(ls, <span class="number">10</span>);<span class="comment">//&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x6570;&#x7EC4;ls&#x7684;&#x6307;&#x9488;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *(ls + i);<span class="comment">//&#x770B;&#x6392;&#x5E8F;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x7EC4;</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/01/冒泡排序/" data-id="cjzi671x9000afgtmo34zs7c3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/29/hello-world/" class="article-date">
@@ -86,7 +128,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -102,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/29/hello-world/" data-id="cjz9kmjv000033ctmn73g5bie" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/29/hello-world/" data-id="cjzi671x60005fgtm3vgop6s3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,12 +176,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>我的第一个博客，主要用来学习，记录学习笔记，以及踩坑记录。</p>
+        <p>&#x6211;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x535A;&#x5BA2;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x6765;&#x5B66;&#x4E60;&#xFF0C;&#x8BB0;&#x5F55;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF0C;&#x4EE5;&#x53CA;&#x8E29;&#x5751;&#x8BB0;&#x5F55;&#x3002;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/29/My-First-Hexo-File/" data-id="cjz9kmjux00013ctmq299yaqk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/29/My-First-Hexo-File/" data-id="cjzi671wt0000fgtmuk1nnb48" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,6 +232,10 @@
       <ul>
         
           <li>
+            <a href="/2019/08/09/二分查找/">二分查找</a>
+          </li>
+        
+          <li>
             <a href="/2019/08/08/if语句导致二叉搜索树中插入元素时报错/">if语句导致二叉搜索树中插入元素时报错</a>
           </li>
         
@@ -203,10 +249,6 @@
         
           <li>
             <a href="/2019/07/06/归并排序/">归并排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/02/快速排序/">快速排序</a>
           </li>
         
       </ul>
