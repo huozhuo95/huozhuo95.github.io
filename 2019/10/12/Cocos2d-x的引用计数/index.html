@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cocos2d-x的引用计数 | 霍 茁</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x5F15;&amp;#x7528;&amp;#x8BA1;&amp;#x6570;&amp;#x7684;&amp;#x7531;&amp;#x6765;&amp;#x5728;C++&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x5173;&amp;#x952E;&amp;#x5B57;new&amp;#x548C;delete&amp;#x7BA1;&amp;#x7406;&amp;#x5806;&amp;#x5">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cocos2d-x的引用计数">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/Cocos2d-x的引用计数/index.html">
+<meta property="og:site_name" content="霍 茁">
+<meta property="og:description" content="&amp;#x5F15;&amp;#x7528;&amp;#x8BA1;&amp;#x6570;&amp;#x7684;&amp;#x7531;&amp;#x6765;&amp;#x5728;C++&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x5173;&amp;#x952E;&amp;#x5B57;new&amp;#x548C;delete&amp;#x7BA1;&amp;#x7406;&amp;#x5806;&amp;#x5">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-12T03:20:26.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cocos2d-x的引用计数">
+<meta name="twitter:description" content="&amp;#x5F15;&amp;#x7528;&amp;#x8BA1;&amp;#x6570;&amp;#x7684;&amp;#x7531;&amp;#x6765;&amp;#x5728;C++&amp;#x7684;&amp;#x5F00;&amp;#x53D1;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E3B;&amp;#x8981;&amp;#x7528;&amp;#x5173;&amp;#x952E;&amp;#x5B57;new&amp;#x548C;delete&amp;#x7BA1;&amp;#x7406;&amp;#x5806;&amp;#x5">
+<meta name="twitter:creator" content="@https:&#x2F;&#x2F;github.com&#x2F;huozhuo95">
+  
+    <link rel="alternate" href="https://github.com/huozhuo95" title="霍 茁" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">霍 茁</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="https://github.com/huozhuo95" title="GitHub主页"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Cocos2d-x的引用计数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/12/Cocos2d-x的引用计数/" class="article-date">
+  <time datetime="2019-10-12T02:01:57.000Z" itemprop="datePublished">2019-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cocos2d-x的引用计数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7684;&#x7531;&#x6765;"><a href="#&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7684;&#x7531;&#x6765;" class="headerlink" title="&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7684;&#x7531;&#x6765;"></a>&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x7684;&#x7531;&#x6765;</h1><p>&#x5728;C++&#x7684;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x5173;&#x952E;&#x5B57;<code>new</code>&#x548C;<code>delete</code>&#x7BA1;&#x7406;&#x5806;&#x533A;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x800C;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x4E0D;&#x5F53;&#x5BB9;&#x6613;&#x9020;&#x6210;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#x7B49;&#x95EE;&#x9898;&#xFF0C;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E0B;&#x9762;&#x4E00;&#x4E2A;&#x7C7B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    A(){a=<span class="number">1</span>};</span><br><span class="line">    ~A();</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E3B;&#x51FD;&#x6570;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;A.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	A* obj1 = <span class="keyword">new</span> A();<span class="comment">//new&#x4E00;&#x4E2A;A&#x7C7B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8BA9;obj1&#x6307;&#x9488;&#x6307;&#x5411;&#x5B83;</span></span><br><span class="line">	A* obj2 = obj1;<span class="comment">//&#x65B0;&#x5EFA;&#x53E6;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#xFF0C;&#x6307;&#x5411;&#x76F8;&#x540C;&#x7684;&#x5BF9;&#x8C61;</span></span><br><span class="line">	<span class="keyword">delete</span> obj1;<span class="comment">//&#x5C06;obj1&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x4ECE;&#x5185;&#x5B58;&#x4E2D;&#x91CA;&#x653E;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; obj2-&gt;a &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//&#x6B64;&#x5904;&#x4F1A;&#x51FA;&#x95EE;&#x9898;&#xFF0C;&#x6253;&#x5370;&#x51FA;&#x672A;&#x77E5;&#x7684;&#x6570;</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#xFF0C;&#x672C;&#x6765;&#x7684;&#x610F;&#x56FE;&#x662F;&#x628A;<code>obj1</code>&#x91CA;&#x653E;&#x6389;&#xFF0C;&#x53EF;&#x662F;<code>obj2</code>&#x4E5F;&#x4E0D;&#x5C0F;&#x5FC3;&#x88AB;&#x91CA;&#x653E;&#x6389;&#x4E86;&#xFF0C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E0D;&#x662F;1&#x4E86;&#xFF0C;&#x800C;&#x662F;&#x4E00;&#x4E2A;&#x65E0;&#x6CD5;&#x9884;&#x77E5;&#x7684;&#x6570;&#x3002;</p>
+<p><strong>&#x8FD9;&#x662F;&#x56E0;&#x4E3A;</strong>&#xFF1A;</p>
+<p>&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x7531;&#x4E8E;&#x4E24;&#x4E2A;A&#x7C7B;&#x578B;&#x7684;&#x6307;&#x9488;&#x6307;&#x5411;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;&#xFF0C;&#x5F53;&#x4F7F;&#x7528;<code>delete</code>&#x91CA;&#x653E;&#x6389;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x65F6;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x6307;&#x9488;&#x4E5F;&#x5931;&#x6548;&#x4E86;&#x3002;</p>
+<p>&#x867D;&#x7136;&#x4E0A;&#x8FF0;&#x4F8B;&#x5B50;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x5DE5;&#x7A0B;&#x91CF;&#x5DE8;&#x5927;&#xFF0C;&#x5F80;&#x5F80;&#x5F88;&#x5BB9;&#x5668;&#x51FA;&#x9519;&#xFF0C;&#x4E14;&#x4E0D;&#x6613;&#x53D1;&#x73B0;&#x8FD9;&#x4E9B;&#x9690;&#x60A3;&#x3002;</p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x8981;&#x60F3;&#x5904;&#x7406;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#xFF0C;&#x786E;&#x4FDD;&#x5185;&#x5B58;&#x53EF;&#x4EE5;&#x88AB;&#x6B63;&#x786E;&#x7684;&#x91CA;&#x653E;&#xFF0C;&#x5C31;&#x8981;&#x7528;&#x5230;<strong>&#x5F15;&#x7528;&#x8BA1;&#x6570;</strong>&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#x3002;</p>
+<h1 id="C-&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;"><a href="#C-&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;" class="headerlink" title="C++&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;"></a>C++&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;</h1><p>&#x8FD8;&#x662F;&#x5BF9;&#x4E8E;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x8FDB;&#x884C;&#x4E00;&#x4E9B;&#x6539;&#x8FDB;&#xFF0C;&#x52A0;&#x5165;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x8FD9;&#x4E2A;&#x673A;&#x5236;&#xFF0C;&#x7C7B;&#x7684;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A()</span><br><span class="line">    {</span><br><span class="line">        a=<span class="number">1</span>;</span><br><span class="line">        iCount=<span class="number">1</span>;<span class="comment">//&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x521D;&#x59CB;&#x5316;&#x4E3A;1</span></span><br><span class="line">    }</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">myFree</span><span class="params">()</span><span class="comment">//&#x201C;&#x91CA;&#x653E;&#x201D;&#x5BF9;&#x8C61;&#x7684;&#x51FD;&#x6570;</span></span></span><br><span class="line"><span class="function">    </span>{</span><br><span class="line">		--iCount;<span class="comment">//&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#xFF0C;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x51CF;&#x4E00;</span></span><br><span class="line">		<span class="keyword">if</span> (iCount &lt;= <span class="number">0</span>)<span class="comment">//&#x53EA;&#x6709;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x4E3A;0&#x4E86;&#xFF0C;&#x624D;&#x771F;&#x6B63;&#x91CA;&#x653E;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;</span></span><br><span class="line">	    {</span><br><span class="line">		    <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">	    }</span><br><span class="line">    }</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> iCount;<span class="comment">//&#x5F15;&#x7528;&#x8BA1;&#x6570;</span></span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x4E2A;&#x7C7B;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x6210;&#x5458;<code>iCount</code>&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x5F53;&#x524D;&#x5BF9;&#x8C61;&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#xFF0C;&#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x4E3A;1&#x3002;</p>
+<p><code>myFree</code>&#x6210;&#x5458;&#x51FD;&#x6570;&#x662F;&#x7528;&#x6765;&#x5B9E;&#x73B0;&#x6790;&#x6784;&#x529F;&#x80FD;&#x7684;&#xFF0C;&#x5728;&#x5B9E;&#x9645;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5C31;&#x4E0D;&#x518D;&#x4F7F;&#x7528;<code>delete</code>&#x5173;&#x952E;&#x5B57;&#x4E86;&#xFF0C;&#x800C;&#x662F;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x6210;&#x5458;&#x51FD;&#x6570;&#x91CA;&#x653E;&#x5185;&#x5B58;&#xFF08;&#x6CE8;&#x610F;&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x771F;&#x6B63;&#x91CA;&#x653E;&#x5185;&#x5B58;&#xFF0C;&#x800C;&#x662F;&#x6839;&#x636E;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x6765;&#x5224;&#x5B9A;&#x662F;&#x5426;&#x8981;&#x91CA;&#x653E;&#xFF09;&#x3002;</p>
+<p>&#x4E00;&#x4E0B;&#x662F;&#x6539;&#x8FDB;&#x540E;&#x7684;&#x4E3B;&#x51FD;&#x6570;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;A.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	A* obj1 = <span class="keyword">new</span> A();</span><br><span class="line">	A* obj2 = obj1;</span><br><span class="line">	obj2-&gt;iCount += <span class="number">1</span>;<span class="comment">//&#x5C06;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x52A0;&#x4E00;</span></span><br><span class="line">	obj1-&gt;myFree();<span class="comment">//&#x8C03;&#x7528;&#x4E00;&#x6B21;myFree()&#x4E0D;&#x4F1A;&#x771F;&#x6B63;&#x91CA;&#x653E;&#x8BE5;&#x5BF9;&#x8C61;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; obj2-&gt;a &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//&#x80FD;&#x591F;&#x6B63;&#x5E38;&#x6253;&#x5370;1</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="Cocos2d-x&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;"><a href="#Cocos2d-x&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;" class="headerlink" title="Cocos2d-x&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;"></a>Cocos2d-x&#x7684;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;</h1><p>&#x5728;Cocos2d-x 3.17.2&#x7248;&#x672C;&#x4E2D;&#xFF0C;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x673A;&#x5236;&#x5C01;&#x88C5;&#x5728;<code>Ref</code>&#x7C7B;&#x4E2D;&#xFF0C;&#x8FD9;&#x662F;&#x6240;&#x6709;&#x7CBE;&#x7075;&#x3001;&#x83DC;&#x5355;&#x3001;&#x5C42;&#x7B49;&#x5143;&#x7D20;&#x7684;&#x57FA;&#x7C7B;&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x6570;&#x636E;&#x6210;&#x5458;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> _referenceCount;</span><br></pre></td></tr></table></figure>
+
+<p>&#x5B83;&#x5C31;&#x662F;&#x5F15;&#x7528;&#x8BA1;&#x6570;(count of references)&#xFF0C;&#x901A;&#x8FC7;&#x5BF9;&#x5B83;&#x7684;&#x52A0;&#x51CF;&#x64CD;&#x4F5C;&#xFF0C;&#x63A7;&#x5236;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x88AB;&#x91CA;&#x653E;&#x3002;</p>
+<p>&#x5728;<code>Ref</code>&#x7C7B;&#x7684;&#x6210;&#x5458;&#x4E2D;&#xFF0C;&#x6709;&#x80FD;&#x591F;&#x5C06;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x52A0;&#x4E00;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Ref::retain()</span><br><span class="line">{</span><br><span class="line">    CCASSERT(_referenceCount &gt; <span class="number">0</span>, <span class="string">&quot;reference count should be greater than 0&quot;</span>);</span><br><span class="line">    ++_referenceCount;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x800C;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x7684;&#x51FD;&#x6570;&#x5B9A;&#x4E49;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Ref::release()</span><br><span class="line">{</span><br><span class="line">    CCASSERT(_referenceCount &gt; <span class="number">0</span>, <span class="string">&quot;reference count should be greater than 0&quot;</span>);</span><br><span class="line">    --_referenceCount;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_referenceCount == <span class="number">0</span>)</span><br><span class="line">    {</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">        <span class="keyword">delete</span> <span class="keyword">this</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x53EF;&#x89C1;&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x5F15;&#x7528;&#x8BA1;&#x6570;&#x4E3A;0&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x624D;&#x4F1A;&#x8C03;&#x7528;<code>delete</code>&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x91CA;&#x653E;&#x8BE5;&#x5BF9;&#x8C61;&#x3002;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/12/Cocos2d-x的引用计数/" data-id="ck1mzu0hd00036wtm6p4rw9ik" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/23/回溯法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">回溯法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/其它/">其它</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/踩坑/">踩坑</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/12/Cocos2d-x的引用计数/">Cocos2d-x的引用计数</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/23/回溯法/">回溯法</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/30/plist文件的使用/">plist文件的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/25/Cocos2d-x引擎基本类解析/">Cocos2d-x引擎基本类解析</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/09/二分查找/">二分查找</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Huo Zhuo<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

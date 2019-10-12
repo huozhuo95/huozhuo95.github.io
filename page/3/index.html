@@ -63,6 +63,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-C-各种进制的输入输出" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/22/C-各种进制的输入输出/" class="article-date">
+  <time datetime="2019-07-22T08:16:15.000Z" itemprop="datePublished">2019-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/22/C-各种进制的输入输出/">C++各种进制的输入输出</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&#x200B;        C++&#x4E2D;&#x6574;&#x6570;&#x7684;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x5E38;&#x7528;10&#x8FDB;&#x5236;&#x8868;&#x793A;&#xFF0C;&#x5F53;&#x8981;&#x4F7F;&#x7528;&#x4E8C;&#x8FDB;&#x5236;&#x3001;&#x516B;&#x8FDB;&#x5236;&#x3001;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x600E;&#x6837;&#x8FDB;&#x884C;&#x8F93;&#x5165;&#x548C;&#x8F93;&#x51FA;&#x64CD;&#x4F5C;&#x5462;&#xFF1F;</p>
+<h2 id="cin&#x548C;cout&#x7684;&#x64CD;&#x4F5C;"><a href="#cin&#x548C;cout&#x7684;&#x64CD;&#x4F5C;" class="headerlink" title="cin&#x548C;cout&#x7684;&#x64CD;&#x4F5C;"></a>cin&#x548C;cout&#x7684;&#x64CD;&#x4F5C;</h2><p>&#x200B;        &#x5BF9;&#x4E8E;&#x516B;&#x8FDB;&#x5236;&#x548C;&#x5341;&#x516D;&#x8FDB;&#x5236;&#xFF0C;&#x8981;&#x8BB0;&#x4F4F;&#x5173;&#x952E;&#x5B57;oct&#x548C;hex&#xFF0C;&#x8981;&#x5728;&#x8FD0;&#x7B97;&#x7B26;&#x548C;&#x53D8;&#x91CF;&#x4E4B;&#x95F4;&#x6DFB;&#x52A0;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int num1 = 0;</span><br><span class="line">int num2 = 0;</span><br><span class="line">cin &gt;&gt; oct &gt;&gt; num1;//&#x4EE5;&#x516B;&#x8FDB;&#x5236;&#x683C;&#x5F0F;&#x8F93;&#x5165;&#xFF0C;&#x5982;&#xFF1A;011&#xFF08;&#x5373;9&#xFF09;</span><br><span class="line">cout &lt;&lt;  num1 &lt;&lt; endl;//&#x9ED8;&#x8BA4;&#x8F93;&#x51FA;&#x5341;&#x8FDB;&#x5236;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;9</span><br><span class="line">cout &lt;&lt; hex &lt;&lt; num1 &lt;&lt; endl;//&#x6539;&#x4E3A;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x8F93;&#x51FA;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;9</span><br><span class="line"></span><br><span class="line">cin &gt;&gt; hex &gt;&gt; num2;//&#x4EE5;&#x5341;&#x516D;&#x8FDB;&#x5236;&#x683C;&#x5F0F;&#x8F93;&#x5165;&#xFF0C;&#x5982;&#xFF1A;0xF&#xFF08;&#x5373;15&#xFF09;</span><br><span class="line">cout &lt;&lt; oct &lt;&lt; num2 &lt;&lt; endl;//&#x516B;&#x8FDB;&#x5236;&#x8F93;&#x51FA;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;17</span><br><span class="line">cout &lt;&lt; num2 &lt;&lt; endl;//&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x8FD8;&#x662F;&#x516B;&#x8FDB;&#x5236;&#xFF1A;17</span><br><span class="line">cout &lt;&lt; dec;//&#x8981;&#x624B;&#x52A8;&#x6539;&#x56DE;&#x5341;&#x8FDB;&#x5236;</span><br></pre></td></tr></table></figure>
+
+<p>&#x200B;        &#x5BF9;&#x4E8E;&#x4E8C;&#x8FDB;&#x5236;&#xFF0C;&#x8981;&#x7528;&#x5230;&#x6807;&#x51C6;&#x5E93;&#x7684;bitset&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;bitset&gt;//&#x8981;&#x5305;&#x542B;&#x8FD9;&#x4E2A;bitset&#x5934;&#x6587;&#x4EF6;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">{</span><br><span class="line">	bitset&lt;10&gt; bits;//bits&#x6709;10&#x4F4D;&#xFF08;&#x53EF;&#x6539;&#x4E3A;&#x4EFB;&#x610F;&#x4F4D;&#x6570;&#xFF09;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x6BCF;&#x4F4D;&#x90FD;&#x662F;0</span><br><span class="line">	cin &gt;&gt; bits;//&#x76F4;&#x63A5;&#x8F93;&#x5165;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#xFF0C;&#x5982;&#xFF1A;10110</span><br><span class="line">	cout &lt;&lt;dec&lt;&lt; bits;//&#x8F93;&#x51FA;&#x7684;&#x662F;&#x4E8C;&#x8FDB;&#x5236;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	bitset&lt;6&gt; bit2(5);//&#x5229;&#x7528;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x628A;&#x5341;&#x8FDB;&#x5236;&#x8F6C;&#x6362;&#x6210;&#x4E8C;&#x8FDB;&#x5236;</span><br><span class="line">	cout &lt;&lt; bit2 &lt;&lt; endl;//&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;000101</span><br><span class="line">	cout &lt;&lt;bit2.to_ulong() &lt;&lt; endl;//&#x628A;&#x4E0A;&#x8FF0;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x8F6C;&#x6362;&#x6210;&#x5341;&#x8FDB;&#x5236;&#xFF0C;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A;5</span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/22/C-各种进制的输入输出/" data-id="ck1mzu0h500006wtm0i763ahr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-string-size-type引起的死循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/10/string-size-type引起的死循环/" class="article-date">
@@ -101,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/10/string-size-type引起的死循环/" data-id="ck0x2avi5000c4stm5zknuff1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/10/string-size-type引起的死循环/" data-id="ck1mzu0hl000c6wtm6jh2zpg4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/踩坑/">踩坑</a></li></ul>
@@ -146,51 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/06/归并排序/" data-id="ck0x2avis000i4stmex0sjux6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-快速排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/02/快速排序/" class="article-date">
-  <time datetime="2019-07-02T13:05:04.000Z" itemprop="datePublished">2019-07-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/02/快速排序/">快速排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="&#x601D;&#x8DEF;"><a href="#&#x601D;&#x8DEF;" class="headerlink" title="&#x601D;&#x8DEF;"></a>&#x601D;&#x8DEF;</h2><p>&#x9009;&#x53D6;&#x6700;&#x5DE6;&#x8FB9;&#x6570;&#x4E3A;&#x67A2;&#x8F74;&#xFF0C;&#x5B9A;&#x4E49;&#x4E24;&#x4E2A;&#x6E38;&#x6807;i&#x548C;j&#x5206;&#x522B;&#x6307;&#x5411;&#x4E24;&#x7AEF;&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x4E34;&#x65F6;&#x5B58;&#x653E;&#x67A2;&#x8F74;&#xFF1B;<br>j&#x5411;&#x5DE6;&#x79FB;&#x627E;&#x51FA;&#x5C0F;&#x4E8E;&#x67A2;&#x8F74;&#x7684;&#x653E;&#x5728;i&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;i&#x5411;&#x53F3;&#x79FB;&#x627E;&#x51FA;&#x5927;&#x4E8E;&#x7B49;&#x4E8E;&#x67A2;&#x8F74;&#x7684;&#x653E;&#x53F3;&#x8FB9;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x4F9D;&#x6B21;&#x4EA4;&#x66FF;&#xFF1B;<br>&#x76F4;&#x5230;i&#x4E0E;j&#x91CD;&#x5408;&#xFF0C;&#x628A;&#x67A2;&#x8F74;&#x8D4B;&#x503C;&#x7ED9;&#x4E2D;&#x95F4;&#x7684;&#x4F4D;&#x7F6E;(&#x5373;i)&#xFF0C;&#x518D;&#x9012;&#x5F52;&#x67A2;&#x8F74;&#x7684;&#x524D;&#x534A;&#x548C;&#x540E;&#x534A;&#x90E8;&#x5206;&#x3002;</p>
-<h2 id="&#x7279;&#x70B9;"><a href="#&#x7279;&#x70B9;" class="headerlink" title="&#x7279;&#x70B9;"></a>&#x7279;&#x70B9;</h2><p>&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;&#x5E73;&#x5747;O(nlogn)&#xFF0C;&#x6700;&#x6162;O(n^2)</p>
-<p>&#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x4E0D;&#x7A33;&#x5B9A;</p>
-<p>&#x4F18;&#x70B9;&#xFF1A;&#x5E73;&#x5747;&#x901F;&#x5EA6;&#x5FEB;</p>
-<h2 id="&#x53C2;&#x8003;&#x4EE3;&#x7801;"><a href="#&#x53C2;&#x8003;&#x4EE3;&#x7801;" class="headerlink" title="&#x53C2;&#x8003;&#x4EE3;&#x7801;"></a>&#x53C2;&#x8003;&#x4EE3;&#x7801;</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;//&#x7528;&#x51FD;&#x6570;&#x6A21;&#x677F;&#x5B9A;&#x4E49;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">quick_sort</span>(<span class="title">T</span>* <span class="title">a</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">left</span>, <span class="title">const</span> <span class="title">int</span> <span class="title">right</span>)</span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="keyword">if</span> (left &lt; right)<span class="comment">//&#x9012;&#x5F52;&#x51FA;&#x53E3;&#x4E3A;left&gt;=right</span></span><br><span class="line">	{</span><br><span class="line">		<span class="comment">//&#x5B9A;&#x4E49;&#x6307;&#x9488;i&#x548C;j&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x6307;&#x9488;&#x4ECE;&#x4E24;&#x7AEF;&#x5411;&#x4E2D;&#x95F4;&#x79FB;&#x52A8;</span></span><br><span class="line">		<span class="keyword">int</span> i = left;  </span><br><span class="line">		<span class="keyword">int</span> j = right;</span><br><span class="line">		T pivot = a[left];<span class="comment">//&#x9009;&#x53D6;&#x6700;&#x5DE6;&#x8FB9;&#x7684;&#x5143;&#x7D20;&#x4E3A;&#x57FA;&#x51C6;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x80FD;&#x7ED9;a[i]&#x817E;&#x51FA;&#x4F4D;&#x7F6E;</span></span><br><span class="line">		<span class="keyword">while</span> (i &lt; j)</span><br><span class="line">		{</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] &gt;= pivot)j--;<span class="comment">//&#x5927;&#x7684;&#x653E;&#x53F3;&#x8FB9;&#xFF0C;&#x6240;&#x4EE5;&#x4ECE;&#x53F3;&#x5411;&#x5DE6;&#x627E;&#x51FA;&#x6BD4;pivot&#x5C0F;&#x7684;&#x5143;&#x7D20;</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			{</span><br><span class="line">				a[i] = a[j];<span class="comment">//&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x7ED9;a[i]&#x817E;&#x51FA;&#x4F4D;&#x7F6E;&#x4E86;&#xFF0C;&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x628A;&#x5C0F;&#x5143;&#x7D20;a[j]&#x653E;&#x5728;a[i]&#x7684;&#x4F4D;&#x7F6E;</span></span><br><span class="line">				i++;<span class="comment">//i&#x7684;&#x6307;&#x9488;&#x5411;&#x53F3;&#x79FB;&#xFF0C;&#x51C6;&#x5907;&#x540E;&#x7EED;&#x5224;&#x65AD;</span></span><br><span class="line">			}</span><br><span class="line">			<span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] &lt; pivot)i++;<span class="comment">//&#x5C0F;&#x7684;&#x653E;&#x5DE6;&#x8FB9;&#xFF0C;i&#x5411;&#x53F3;&#x79FB;&#x76F4;&#x5230;&#x53D1;&#x73B0;a[i]&#x4E0D;&#x6BD4;pivot&#x5C0F;</span></span><br><span class="line">			<span class="keyword">if</span> (i &lt; j)</span><br><span class="line">			{</span><br><span class="line">				a[j] = a[i];<span class="comment">//&#x7531;&#x4E8E;&#x524D;&#x9762;a[j]&#x7684;&#x503C;&#x8D4B;&#x503C;&#x7ED9;&#x4E86;&#x524D;&#x9762;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x6240;&#x4EE5;a[j]&#x7684;&#x4F4D;&#x7F6E;&#x7A7A;&#x51FA;&#x6765;&#x4E86;</span></span><br><span class="line">				j--;<span class="comment">//j&#x7684;&#x6307;&#x9488;&#x5411;&#x5DE6;&#x79FB;&#xFF0C;&#x51C6;&#x5907;&#x4E0B;&#x4E00;&#x8F6E;&#x7684;&#x5FAA;&#x73AF;</span></span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		a[i] = pivot;<span class="comment">//&#x5F53;i=j&#x7684;&#x65F6;&#x5019;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&#xFF0C;&#x6B64;&#x65F6;&#x7684;a[i]&#x662F;&#x7A7A;&#x51FA;&#x7684;&#x4F4D;&#x7F6E;</span></span><br><span class="line">		quick_sort(a, left, i - <span class="number">1</span>);</span><br><span class="line">		quick_sort(a, i + <span class="number">1</span>, right);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"><span class="comment">//&#x6D4B;&#x8BD5;&#x51FD;&#x6570;</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="keyword">int</span> k[] = { <span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="number">1</span> };</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//&#x8F93;&#x51FA;&#x4E3A;64285723901</span></span><br><span class="line">	quick_sort(k, <span class="number">0</span>, <span class="number">10</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">10</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; k[i];</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;<span class="comment">//&#x8F93;&#x51FA;&#x4E3A;01223456789</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/02/快速排序/" data-id="ck0x2aviu000k4stm9m3xlnnh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/06/归并排序/" data-id="ck1mzu0hr000j6wtm048aswsv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -206,7 +207,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -230,7 +231,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li></ul>
     </div>
   </div>
 
@@ -241,6 +242,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/12/Cocos2d-x的引用计数/">Cocos2d-x的引用计数</a>
+          </li>
         
           <li>
             <a href="/2019/09/23/回溯法/">回溯法</a>
@@ -256,10 +261,6 @@
         
           <li>
             <a href="/2019/08/09/二分查找/">二分查找</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/08/if语句导致二叉搜索树中插入元素时报错/">if语句导致二叉搜索树中插入元素时报错</a>
           </li>
         
       </ul>
